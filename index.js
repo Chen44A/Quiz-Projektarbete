@@ -85,11 +85,12 @@ const darkMode = document.querySelector('#darkMode');
     isDarkMode =!isDarkMode;
   });
 
-  //set variables
-  const quizContainer = document.querySelector('#quiz_container');
-  const questionContainer = document.querySelector('#question_container');
-  const optionsContainer = document.querySelector('#options_container');
-  const pointCurrentQue = document.querySelector('#current_que');
+//set variables
+const quizContainer = document.querySelector('#quiz_container');
+const questionContainer = document.querySelector('#question_container');
+const optionsContainer = document.querySelector('#options_container');
+const pointCurrentQue = document.querySelector('#current_que');
+
 
 //set start feature
   const startQuiz = document.querySelector('#start');
@@ -99,14 +100,15 @@ const darkMode = document.querySelector('#darkMode');
     startQuiz.style.display = "none";
     quizContainer.style.display = '';
   })
-
+ 
+// set load question process
   let score = 0;
   let currentQuestion = 0;
-
+  
   const loadQuestion = () => {
     const currentQuiz = questions[currentQuestion];
-
     questionContainer.innerText = currentQuiz.question;
+    //empty questions and options
     optionsContainer.innerHTML = '';
 
     if (currentQuiz.type === 'trueFalse' || currentQuiz.type === 'singleChoice') {
@@ -140,18 +142,57 @@ const darkMode = document.querySelector('#darkMode');
           optionsContainer.appendChild(document.createElement('br'));
         });
     }
+    // set submit button efter option selected
     let seletedInput = document.querySelectorAll('#options_container input')
-
-    seletedInput.forEach((input)=>{
-         
-        if(input.checked){
-            const button = document.createElement('button');
-            button.innerText = 'Submit';
-          
-            optionsContainer.appendChild(button);
-        }
-        console.log(input.value);
+    const submitBtn = document.createElement('button');
+    submitBtn.innerText = 'Submit';
+    
+    seletedInput.forEach((radioBtn)=>{
+        radioBtn.addEventListener('change',()=>{
+            optionsContainer.appendChild(submitBtn);
+            // add check restult feature on button
+            submitBtn.addEventListener('click',checkAnswer);
+        }) 
     })
+}
+
+// set check point stystem
+  let checkAnswer = () => {
+    const currentQuiz = questions[currentQuestion];
+    //alternativ 1 collect all of the checked value in a new array
+    const selectedRadios =Array.from(document.querySelectorAll('input[type="radio"]:checked'));
+    let radioValue = selectedRadios.map(radio => {
+        return radio.value;
+    })
+    //alternativ 2  这里.map()缩写要注意内(),{}是没有的
+    const selectedCheckboxes = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(chexbox => chexbox.value);
+    //check the answer and calculate the score.
+    let isEqual1 = JSON.stringify(radioValue) === JSON.stringify(currentQuiz.answer);
+    let isEqual2 = JSON.stringify(selectedCheckboxes) === JSON.stringify(currentQuiz.answer);
+    if (isEqual1 === true || isEqual2 === true){
+        score++;
+    }
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        loadQuestion();
+    }else {
+        showResult();
+    }
   }
+
+// show result feature
+let showResult = () => {
+    if (score < questions.length * 0.5){
+        quizContainer.style.color = 'red';
+        quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Underkänt!</p>`
+    } else if ( score < questions.length * 0.75){
+        quizContainer.style.color = 'orange';
+        quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Bra!</p>`
+    }else{
+        quizContainer.style.color = 'green';
+        quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Riktigt bra jobbat!</p>`
+    }
+}
+
  
   loadQuestion();
