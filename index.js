@@ -1,70 +1,70 @@
 const questions = [
     {
         num:1,
-        question: "JavaScript is a static language?",
+        question: "1.JavaScript is a static language?",
         type: "trueFalse",
         options: ["ture,","false"],
         answer: ['false']
     },
     {
         num:2,
-        question: "Which keyword declares a variable?",
+        question: "2.Which keyword declares a variable?",
         type: "multipleChoice",
         options: ["let", "const", "var", "def"],
         answer: ["let", "const", "var"]
     },
     {
         num:3,
-        question: "What does HTML stand for?",
+        question: "3.What does HTML stand for?",
         type: "singleChoice",
         options: ["Hyper Text Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language", "Hyper Tool Markup Language"],
         answer: ["Hyper Text Markup Language"]
     },
     {
         num:4,
-        question: "Is CSS an abbreviation for Cascading Style Sheets?",
+        question: "4.Is CSS an abbreviation for Cascading Style Sheets?",
         type: "trueFalse",
         options: ["true", "false"],
         answer: ["true"]
     },
     {
         num:5,
-        question: "Which of the following is not a programming language?",
+        question: "5.Which of the following is not a programming language?",
         type: "singleChoice",
         options: ["Python", "Java", "HTML", "C++"],
         answer: ["HTML"]
     },
     {
         num:6,
-        question: "React was developed by Google?",
+        question: "6.React was developed by Google?",
         type: "trueFalse",
         options: ["true", "false"],
         answer: ["false"]
     },
     {
         num:7,
-        question: "Which of the following is a way of data storage? (",
+        question: "7.Which of the following is a way of data storage?",
         type: "multipleChoice",
         options: ["Array", "Object", "String", "All of the above"],
         answer: ["Array", "Object"]
     },
     {
         num:8,
-        question: "What is the full form of API?",
+        question: "8.What is the full form of API?",
         type: "singleChoice",
         options: ["Apple Programming Interface", "Application Programming Interface", "Automated Programming Interface", "All Programming Interface"],
         answer: ["Application Programming Interface"]
     },
     {
         num:9,
-        question: "In JavaScript, '===' is the same as '=='?",
+        question: "9.In JavaScript, '===' is the same as '=='?",
         type: "trueFalse",
         options: ["true", "false"],
         answer: ["false"]
     },
     {
         num:10,
-        question: "Which one is not a version control system?",
+        question: "10.Which one is not a version control system?",
         type: "singleChoice",
         options: ["Git", "SVN", "Mercurial", "Python"],
         answer: ["Python"]
@@ -89,7 +89,7 @@ const darkMode = document.querySelector('#darkMode');
 const quizContainer = document.querySelector('#quiz_container');
 const questionContainer = document.querySelector('#question_container');
 const optionsContainer = document.querySelector('#options_container');
-const pointCurrentQue = document.querySelector('#current_que');
+const result = document.querySelector('#result');
 
 
 //set start feature
@@ -155,7 +155,7 @@ const pointCurrentQue = document.querySelector('#current_que');
         }) 
     })
 }
-
+let userAnswer = [];
 // set check point stystem
   let checkAnswer = () => {
     const currentQuiz = questions[currentQuestion];
@@ -166,7 +166,17 @@ const pointCurrentQue = document.querySelector('#current_que');
     })
     //alternativ 2  这里.map()缩写要注意内(),{}是没有的
     const selectedCheckboxes = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(chexbox => chexbox.value);
-    //check the answer and calculate the score.
+  
+    if(document.querySelectorAll('input[type="radio"]').length > 0){
+        radioValue.forEach((value) => { 
+            userAnswer.push(value);
+        })
+        // userAnswer.push(radioValue.toString());
+    } else if (document.querySelectorAll('input[type="checkbox"]')){
+        userAnswer.push(selectedCheckboxes.toString());
+    }
+
+  //check the answer and calculate the score.
     let isEqual1 = JSON.stringify(radioValue) === JSON.stringify(currentQuiz.answer);
     let isEqual2 = JSON.stringify(selectedCheckboxes) === JSON.stringify(currentQuiz.answer);
     if (isEqual1 === true || isEqual2 === true){
@@ -192,7 +202,26 @@ let showResult = () => {
         quizContainer.style.color = 'green';
         quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Riktigt bra jobbat!</p>`
     }
+    let myAnswer = document.createElement('button');
+    myAnswer.innerText= 'Show my answer';
+    quizContainer.append(myAnswer);
+    myAnswer.addEventListener('click', showMyAnswer);
 }
 
- 
-  loadQuestion();
+
+
+let showMyAnswer = () => {
+    const facitArray = questions.map((data)=> {
+        return data.answer.join(',')
+    })
+    for (let i = 0; i < userAnswer.length; i++) {
+        if (userAnswer[i] !== facitArray[i]){
+            let li = document.createElement('li');
+                li.innerHTML = `Que:${[i+1]}, ${userAnswer[i]} (${facitArray[i]})`
+                li.style.color = 'red';
+                result.append(li)
+        }
+    }
+}
+
+loadQuestion();
