@@ -214,10 +214,14 @@ let showMyAnswer = () => {
     const facitArray = questions.map((data)=> {
         return data.answer.join(',')
     })
+    const questionArray = questions.map((question)=> {
+        return question.question
+    })
+    
     for (let i = 0; i < userAnswer.length; i++) {
         if (userAnswer[i] !== facitArray[i]){
             let li = document.createElement('li');
-                li.innerHTML = `Que:${[i+1]}, ${userAnswer[i]} (${facitArray[i]})`
+                li.innerHTML = `${questionArray[i]}, <p>${userAnswer[i]} (${facitArray[i]})</p>`
                 li.style.color = 'red';
                 result.append(li)
         }
