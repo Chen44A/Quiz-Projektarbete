@@ -138,7 +138,7 @@ body.darkmode {
 
 @media (max-width:480px){
     body{
-        min-height:30vh;
+        min-height:20vh;
     }
     #main_content {
         margin: 0px;
@@ -164,6 +164,7 @@ body.darkmode {
     #result{
         padding: 20px;
         max-width: 300px;
+        min-height: 620px;
         margin: 50px auto;
         padding: 30px 20px;
     }
