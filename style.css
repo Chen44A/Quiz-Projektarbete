@@ -135,3 +135,36 @@ body.darkmode {
     color: white;
     border: 1px solid white;
 }
+
+@media (max-width:480px){
+    body{
+        min-height:30vh;
+    }
+    #main_content {
+        margin: 0px;
+    }
+    #start, #quiz_container {
+        max-width: 300px;
+        min-height: 500px;
+        padding: 20px 15px;
+        margin: 115px;
+
+    }
+    #question_container, #option_container{
+        width: 300px;
+        font-size: 1.2rem;
+    }
+    label {
+        width: 220px;
+        height: 30px;
+        margin: 10px;
+        padding-top:9px ;
+        padding-left: 10px;
+    }
+    #result{
+        padding: 20px;
+        max-width: 300px;
+        margin: 50px auto;
+        padding: 30px 20px;
+    }
+}
