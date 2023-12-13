@@ -1,73 +1,73 @@
 const questions = [
     {
         num:1,
-        question: "1.JavaScript is a static language?",
+        question: "1. [trueFalse] Is the Chinese New Year determined by the lunar calendar rather than the Gregorian calendar?",
         type: "trueFalse",
-        options: ["ture,","false"],
-        answer: ['false']
+        options: ["ture","false"],
+        answer: ['ture']
     },
     {
         num:2,
-        question: "2.Which keyword declares a variable?",
+        question: "2. [multipleChoice] Which of the following are Chinese inventions? ",
         type: "multipleChoice",
-        options: ["let", "const", "var", "def"],
-        answer: ["let", "const", "var"]
+        options: ["Gunpowder", "Paper", "Compass", "Printing"],
+        answer: ["Gunpowder", "Paper", "Compass", "Printing"],
     },
     {
         num:3,
-        question: "3.What does HTML stand for?",
-        type: "singleChoice",
-        options: ["Hyper Text Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language", "Hyper Tool Markup Language"],
-        answer: ["Hyper Text Markup Language"]
+        question: "3. [trueFalse] Does China have 56 different ethnic groups? ",
+        type: "trueFalse",
+        options: ["ture","false"],
+        answer: ["ture"],
     },
     {
         num:4,
-        question: "4.Is CSS an abbreviation for Cascading Style Sheets?",
+        question: "4. [trueFalse] Does China have over 100 languages? ",
         type: "trueFalse",
         options: ["true", "false"],
         answer: ["true"]
     },
     {
         num:5,
-        question: "5.Which of the following is not a programming language?",
+        question: "5. [singleChoice] Which city is the capital of China?",
         type: "singleChoice",
-        options: ["Python", "Java", "HTML", "C++"],
-        answer: ["HTML"]
+        options: ["Shanghai", "Beijing", "Hong Kong", "Guangzhou"],
+        answer: ["Beijing"]
     },
     {
         num:6,
-        question: "6.React was developed by Google?",
-        type: "trueFalse",
-        options: ["true", "false"],
-        answer: ["false"]
+        question: "6. [multipleChoice] What are some of the most famous Chinese architectural landmarks?",
+        type: "multipleChoice",
+        options: ["The Forbidden City","The Great Wall", "Oriental Pearl Tower","Eiffel Tower"],
+        answer: ["The Forbidden City","The Great Wall", "Oriental Pearl Tower"]
     },
     {
         num:7,
-        question: "7.Which of the following is a way of data storage?",
+        question: "7. [multipleChoice] Which of the following are traditional Chinese festivals?",
         type: "multipleChoice",
-        options: ["Array", "Object", "String", "All of the above"],
-        answer: ["Array", "Object"]
+        options: ["Qingming Festival", "Dragon Boat Festival", "Christmas", "Mid-Autumn Festival"],
+        answer: ["Qingming Festival", "Dragon Boat Festival", "Mid-Autumn Festival"]
     },
     {
         num:8,
-        question: "8.What is the full form of API?",
+        question: "8. [singleChoice] Which of the following is the currency unit in China?",
         type: "singleChoice",
-        options: ["Apple Programming Interface", "Application Programming Interface", "Automated Programming Interface", "All Programming Interface"],
-        answer: ["Application Programming Interface"]
+        options: ["Dollar", "Euro", "Renminbi (RMB)", "Yen"],
+        answer: ["Renminbi (RMB)"],
     },
     {
         num:9,
-        question: "9.In JavaScript, '===' is the same as '=='?",
-        type: "trueFalse",
-        options: ["true", "false"],
-        answer: ["false"]
+        question: "9. [singleChoice] Which is the largest internet company in China?",
+        type: "singleChoice",
+        options: ["Baidu", "Alibaba","Xiaomi","Tencent"],
+        answer: ["Alibaba"]
     },
     {
         num:10,
-        question: "10.Which one is not a version control system?",
+        question: "10. [singleChoice] The highest peak in China is?",
         type: "singleChoice",
-        options: ["Git", "SVN", "Mercurial", "Python"],
-        answer: ["Python"]
+        options: ["Mount Everest", "The Alps", "Mount Fuji", "Mount Huangshan"],
+        answer: ["Mount Everest"]
     }
 ]
 
@@ -194,16 +194,16 @@ let userAnswer = [];
 let showResult = () => {
     if (score < questions.length * 0.5){
         quizContainer.style.color = 'red';
-        quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Underkänt!</p>`
+        quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Fail!</p>`
     } else if ( score < questions.length * 0.75){
         quizContainer.style.color = 'orange';
-        quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Bra!</p>`
+        quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Good!</p>`
     }else{
         quizContainer.style.color = 'green';
-        quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Riktigt bra jobbat!</p>`
+        quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Excellent!</p>`
     }
     let myAnswer = document.createElement('button');
-    myAnswer.innerText= 'Show my answer';
+    myAnswer.innerText= 'Show My Answer';
     quizContainer.append(myAnswer);
     myAnswer.addEventListener('click', showMyAnswer);
 }
@@ -211,6 +211,7 @@ let showResult = () => {
 
 
 let showMyAnswer = () => {
+    result.innerHTML = "";
     const facitArray = questions.map((data)=> {
         return data.answer.join(',')
     })
@@ -221,7 +222,7 @@ let showMyAnswer = () => {
     for (let i = 0; i < userAnswer.length; i++) {
         if (userAnswer[i] !== facitArray[i]){
             let li = document.createElement('li');
-                li.innerHTML = `${questionArray[i]}, <p>${userAnswer[i]} (${facitArray[i]})</p>`
+                li.innerHTML = `${questionArray[i]} <p>${userAnswer[i]} (${facitArray[i]})</p>`
                 li.style.color = 'red';
                 result.append(li)
         }
