@@ -140,7 +140,7 @@ const result = document.querySelector('#result');
     // set submit button efter option selected
     let seletedInput = document.querySelectorAll('#options_container input')
     const submitBtn = document.createElement('div');
-    submitBtn.innerHTML = `<button>Submit</button>`;
+    submitBtn.innerHTML = `<button>Next</button>`;
     
     toNextQue.innerHTML= "";
     seletedInput.forEach((radioBtn)=>{
