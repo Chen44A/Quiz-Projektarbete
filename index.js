@@ -57,10 +57,10 @@ const questions = [
     },
     {
         num:9,
-        question: "9. [singleChoice] Which is the largest internet company in China?",
+        question: "9. [singleChoice] Which of the following is a traditional Chinese food?",
         type: "singleChoice",
-        options: ["Baidu", "Alibaba","Xiaomi","Tencent"],
-        answer: ["Alibaba"]
+        options: ["Pizza", "Dumplings","Hamburger","Pasta"],
+        answer: ["Dumplings"]
     },
     {
         num:10,
@@ -73,22 +73,16 @@ const questions = [
 
 //dark mode feature
 const darkMode = document.querySelector('#darkMode');
-  let isDarkMode = false;
   darkMode.addEventListener('click',()=> {
-    if(!isDarkMode) {
-    document.body.style.backgroundColor ="black";
-    document.body.style.color ="white";
-    } else {
-    document.body.style.backgroundColor ="";
-    document.body.style.color ="";
-    }
-    isDarkMode =!isDarkMode;
+    document.body.classList.toggle('darkmode');
+ 
   });
 
 //set variables
 const quizContainer = document.querySelector('#quiz_container');
 const questionContainer = document.querySelector('#question_container');
 const optionsContainer = document.querySelector('#options_container');
+const toNextQue = document.querySelector('#toNextQue');
 const result = document.querySelector('#result');
 
 
@@ -144,12 +138,13 @@ const result = document.querySelector('#result');
     }
     // set submit button efter option selected
     let seletedInput = document.querySelectorAll('#options_container input')
-    const submitBtn = document.createElement('button');
-    submitBtn.innerText = 'Submit';
+    const submitBtn = document.createElement('div');
+    submitBtn.innerHTML = `<button>Submit</button>`;
     
+    toNextQue.innerHTML= "";
     seletedInput.forEach((radioBtn)=>{
         radioBtn.addEventListener('change',()=>{
-            optionsContainer.appendChild(submitBtn);
+            toNextQue.appendChild(submitBtn);
             // add check restult feature on button
             submitBtn.addEventListener('click',checkAnswer);
         }) 
@@ -194,16 +189,16 @@ let userAnswer = [];
 let showResult = () => {
     if (score < questions.length * 0.5){
         quizContainer.style.color = 'red';
-        quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Fail!</p>`
+        quizContainer.innerHTML = `<div><h2>Sorry, you failed!</h2> <p>Your score is: ${score} / ${questions.length}</p></div>`
     } else if ( score < questions.length * 0.75){
         quizContainer.style.color = 'orange';
-        quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Good!</p>`
+        quizContainer.innerHTML = `<div><h2>Well done!</h2> <p>Your score is: ${score} / ${questions.length}</p></div>`
     }else{
         quizContainer.style.color = 'green';
-        quizContainer.innerHTML = `<h2>Your score is: ${score} / ${questions.length}</h2> <p>Excellent!</p>`
+        quizContainer.innerHTML = `<div><h2>Excellent!</h2> <p>Your score is: ${score} / ${questions.length}</p></div>`
     }
     let myAnswer = document.createElement('button');
-    myAnswer.innerText= 'Show My Answer';
+    myAnswer.innerText= 'My Answer';
     quizContainer.append(myAnswer);
     myAnswer.addEventListener('click', showMyAnswer);
 }
@@ -222,11 +217,19 @@ let showMyAnswer = () => {
     for (let i = 0; i < userAnswer.length; i++) {
         if (userAnswer[i] !== facitArray[i]){
             let li = document.createElement('li');
-                li.innerHTML = `${questionArray[i]} <p>${userAnswer[i]} (${facitArray[i]})</p>`
-                li.style.color = 'red';
+                li.innerHTML = `${questionArray[i]} <p>   ${userAnswer[i]} (${facitArray[i]})</p><br>`
                 result.append(li)
+                quizContainer.style.display = "none"
+                result.style.display ="";
         }
     }
+    let replay = document.createElement('button');
+    replay.innerText = 'Replay';
+    result.append(replay)
+    replay.addEventListener('click', (event)=>{
+        event.preventDefault();
+        location.reload()
+    });
 }
 
 loadQuestion();

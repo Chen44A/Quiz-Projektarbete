@@ -4,21 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Projektarbete</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="index.js" defer></script>
 </head>
 <body>
-    <button id="darkMode">Dark mode</button>
-    <div id="start">
-        <h1>Are you ready?</h1>
-        <button id="go">GO!</button>
+    <div class="dark_btn_container">
+        <button id="darkMode">Dark mode</button>
     </div>
-    <div id="quiz_container">
-        <h2>Quiz test</h2>
-        <div id="question_container"></div>
-        <div id="options_container"></div>
-    </div>
-    <div id="result">
-    </div>
+    <section>
+        <div id="main_content">
+            <div id="start">
+                <h1>Are you ready?</h1>
+                <button id="go">GO!</button>
+            </div>
+            <div id="quiz_container">
+                <div id="question_container"></div>
+                <div id="options_container"></div>
+                <div id="toNextQue"></div>
+            </div>
+        </div>
+        <div class="result_container">
+            <ul id="result" style="display: none;"></ul>
+        </div>
+    </section>
 </body>
 </html>
