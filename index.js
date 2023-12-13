@@ -83,6 +83,7 @@ const quizContainer = document.querySelector('#quiz_container');
 const questionContainer = document.querySelector('#question_container');
 const optionsContainer = document.querySelector('#options_container');
 const toNextQue = document.querySelector('#toNextQue');
+const section = document.querySelector('section');
 const result = document.querySelector('#result');
 
 
@@ -219,7 +220,7 @@ let showMyAnswer = () => {
             let li = document.createElement('li');
                 li.innerHTML = `${questionArray[i]} <p>   ${userAnswer[i]} (${facitArray[i]})</p><br>`
                 result.append(li)
-                quizContainer.style.display = "none"
+                section.style.display = "none"
                 result.style.display ="";
         }
     }
