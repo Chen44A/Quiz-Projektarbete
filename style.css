@@ -161,6 +161,9 @@ body.darkmode {
         padding-top:9px ;
         padding-left: 10px;
     }
+    button {
+        font-size: 0.9rem;
+    }
     #result{
         padding: 20px;
         max-width: 300px;
