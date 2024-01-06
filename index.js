@@ -3,26 +3,26 @@ const questions = [
         num:1,
         question: "1. [trueFalse] Is the Chinese New Year determined by the lunar calendar rather than the Gregorian calendar?",
         type: "trueFalse",
-        options: ["ture","false"],
-        answer: ['ture']
+        options: ["true","false"],
+        answer: ['true']
     },
     {
         num:2,
-        question: "2. [multipleChoice] Which of the following are Chinese inventions? ",
+        question: "2. [multipleChoice] Which of the following are Chinese inventions?",
         type: "multipleChoice",
         options: ["Gunpowder", "Paper", "Compass", "Printing"],
         answer: ["Gunpowder", "Paper", "Compass", "Printing"],
     },
     {
         num:3,
-        question: "3. [trueFalse] Does China have 56 different ethnic groups? ",
+        question: "3. [trueFalse] Does China have 56 different ethnic groups?",
         type: "trueFalse",
-        options: ["ture","false"],
-        answer: ["ture"],
+        options: ["true","false"],
+        answer: ["true"],
     },
     {
         num:4,
-        question: "4. [trueFalse] Does China have over 100 languages? ",
+        question: "4. [trueFalse] Does China have over 100 languages?",
         type: "trueFalse",
         options: ["true", "false"],
         answer: ["true"]
