@@ -1,7 +1,7 @@
 const questions = [
     {
         num:1,
-        question: "1. [trueFalse] Is the Chinese New Year determined by the lunar calendar rather than the Gregorian calendar?",
+        question: "1. Is the Chinese New Year determined by the lunar calendar rather than the Gregorian calendar?",
         type: "trueFalse",
         options: ["true","false"],
         answer: ['true']
@@ -15,21 +15,21 @@ const questions = [
     },
     {
         num:3,
-        question: "3. [trueFalse] Does China have 56 different ethnic groups?",
+        question: "3. Does China have 56 different ethnic groups?",
         type: "trueFalse",
         options: ["true","false"],
         answer: ["true"],
     },
     {
         num:4,
-        question: "4. [trueFalse] Does China have over 100 languages?",
+        question: "4. Does China have over 100 languages?",
         type: "trueFalse",
         options: ["true", "false"],
         answer: ["true"]
     },
     {
         num:5,
-        question: "5. [singleChoice] Which city is the capital of China?",
+        question: "5. Which city is the capital of China?",
         type: "singleChoice",
         options: ["Shanghai", "Beijing", "Hong Kong", "Guangzhou"],
         answer: ["Beijing"]
@@ -50,21 +50,21 @@ const questions = [
     },
     {
         num:8,
-        question: "8. [singleChoice] Which of the following is the currency unit in China?",
+        question: "8. Which of the following is the currency unit in China?",
         type: "singleChoice",
         options: ["Dollar", "Euro", "Renminbi (RMB)", "Yen"],
         answer: ["Renminbi (RMB)"],
     },
     {
         num:9,
-        question: "9. [singleChoice] Which of the following is a traditional Chinese food?",
+        question: "9. Which of the following is a traditional Chinese food?",
         type: "singleChoice",
         options: ["Pizza", "Dumplings","Hamburger","Pasta"],
         answer: ["Dumplings"]
     },
     {
         num:10,
-        question: "10. [singleChoice] The highest peak in China is?",
+        question: "10. The highest peak in China is?",
         type: "singleChoice",
         options: ["Mount Everest", "The Alps", "Mount Fuji", "Mount Huangshan"],
         answer: ["Mount Everest"]
@@ -218,14 +218,14 @@ let showMyAnswer = () => {
     for (let i = 0; i < userAnswer.length; i++) {
         if (userAnswer[i] !== facitArray[i]){
             let li = document.createElement('li');
-                li.innerHTML = `${questionArray[i]} <p>   ${userAnswer[i]} (${facitArray[i]})</p><br>`
+                li.innerHTML = `${questionArray[i]} <p>[ ✗ ] Your answer: ${userAnswer[i]} <p>[ ✓ ] Right answer: ${facitArray[i]}</p></p><br>`
                 result.append(li)
                 section.style.display = "none"
                 result.style.display ="";
         }
     }
     let replay = document.createElement('button');
-    replay.innerText = 'Replay';
+    replay.innerText = 'Play Again';
     result.append(replay)
     replay.addEventListener('click', (event)=>{
         event.preventDefault();

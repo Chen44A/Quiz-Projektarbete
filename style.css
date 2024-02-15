@@ -114,8 +114,12 @@ h2 {
 #result li{
     list-style-type:none;
     line-height: 1.5;
+    margin: 0.8rem 0;
 }
 
+li > p {
+    margin: 0.2rem;
+}
 
 /* darkmode setting */
 body.darkmode {
